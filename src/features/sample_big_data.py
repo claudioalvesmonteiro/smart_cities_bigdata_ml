@@ -18,7 +18,7 @@ exec(open('/home/pacha/spark/python/pyspark/shell.py').read())
 spark = SparkSession.builder.appName('random_forest_regression').getOrCreate()
 
 # import data
-df = spark.read.csv('t/311_Service_Requests_from_2010_to_Present.csv' ,header=True, inferSchema=False)
+df = spark.read.csv('datasets/raw/311_Service_Requests_from_2010_to_Present.csv' ,header=True, inferSchema=False)
 
 df.printSchema()
 
