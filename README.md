@@ -1,7 +1,7 @@
 smart_cities_bigdata_ml
 ==============================
 
-Hands-on smart cities with parallel processing and machine learning algorithms using PySpark
+Hands-on smart cities with parallel processing and machine learning algorithms using PySpark and New York City open data.
 
 Project Organization
 ------------
