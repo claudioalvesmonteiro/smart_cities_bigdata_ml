@@ -34,18 +34,3 @@ df.select('Latitude').show()
 # data pre-processing
 #==================================
 
-
-
-
-
-
-
-
-# using SQLContext to read parquet file
-from pyspark.sql import SQLContext
-sqlContext = SQLContext(sc)
-
-# to read parquet file
-df = sqlContext.read.parquet('path-to-file/commentClusters.parquet')
-
---Jeril
