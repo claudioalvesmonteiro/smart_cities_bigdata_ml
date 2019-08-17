@@ -1,0 +1,95 @@
+###################################################
+       BIG DATA E MACHINE LEARNING COM SPARK
+###################################################
+
+# CRISP-DM
+
+Fase1 - Chegando no rolê
+- Entender as dores do cliente
+- Momento de apenas ouvir
+- Entender o negócio, seus processos e envolvidos em cada etapa
+
+Fase 2 - Trocando ideias
+- Leitura de artigos científicos na área
+- Vídeos no youtube
+- Levantar o que tá sendo feito na área
+- Debater com cliente
+
+Fase 3 - Olhando os dados
+- Pegar base do cliente 
+- explorar junto com área de TI e cúpula decisória qausi são os pontos relevantes para o negócio que estão presentes na base
+- Explorar possíveis soluções
+- Diferentes abordagens 
+- Levantar requisitos
+- Debater com cliente para iniciar construção do MVP
+
+Fase 4 - Introdução ao MVP
+- Escolher problema a ser atacado [TARGET]
+- Estudar mais sobre o problema [características e consequências práticas]
+- Traçar possíveis possíveis resoluções
+- Traçar MVP e validar ideia com cliente
+- Entender como o produto vai ser implementado 
+
+Fase 5 - MVP
+- Iniciar desenvolvimento do MVP
+- Análise exploratória dos dados: estatísticas descritivas e visualização de dados
+- Modelo introdutório com poder de explicação e previsão [agregar regras para tomada de decisão]
+- Apresentar MVP ao cliente para validação e/ou correção
+
+Fase 6 - Desenvolvimento
+- Aprofundamento na análise exploratória
+- Aprofundamento na construção dos modelos 
+- Desenvolvimento de sistema de suporte à tomada de decisão
+- Validação com cliente
+
+Fase 7 - Colocando em Produção
+- Lançamento do projeto
+
+
+#=========================================#
+# DATA EXPLORING + DESCRIPTIVE STATISTICS
+#========================================#
+
+
+#### + Viability
+
+# barplot groupby 'Agency'
+
+# barplot groupby 'Complaint Type'
+
+# barplot groupby 'Location Type'
+
+# barplot groupby 'Due Date'
+
+# barplot groupby 'Open Data Channel Type'
+
+#### - Viability
+
+# lineplot groupby date year
+
+# lineplot groupby date month/year
+
+# lineplot groupby date day/month/year
+
+# barplot Text mining Agency Name
+
+# barplot Text mining 'Resolution Description'
+
+# barplot Text mining 'Resolution Description' +
+# groupby 'Agency', 'Complaint Type', 'day of the week'
+
+# 'Latitude' and 'Longitude' / 'Location' map 
+
+# 'Latitude' and 'Longitude' / 'Location' map +
+#  groupby 'Agency', 'Complaint Type', 'day of the week'
+
+# 'Latitude' and 'Longitude' / 'Location' map +
+#  Text Mining
+
+#=======================#
+# FEATURE ENGINEERING
+#======================#
+
+
+
+
