@@ -23,7 +23,7 @@ df = spark.read.csv('datasets/raw/sample_service_requests_ny.csv' ,
                     inferSchema=True)
 
 # visualize count
-def groupAndShow(sparkdf, column, rep=1):
+def groupAndSelect(sparkdf, column, rep=1):
     ''' count and sort
         calculate proportion
         remove column
@@ -41,7 +41,7 @@ def catRepresent(df, column, new_column, rep=1):
         drop unwanted columns and join with dataframe
         create column where representation > 1%    
     '''
-    t1 = groupAndShow(df, column)
+    t1 = groupAndSelect(df, column)
     t1 = t1.withColumn('SIG', SF.when(SF.col("proportion")>rep, SF.lit("1")).otherwise(SF.lit('0')))
     t1 = t1.drop('count','proportion')
     df = df.join(t1, [column], 'left')
@@ -52,6 +52,8 @@ def catRepresent(df, column, new_column, rep=1):
 #=================================#
 # BUILD FEATURES
 #================================#
+
+#-------- DATE
 
 # import functions
 import pyspark.sql.functions as SF
@@ -67,7 +69,8 @@ df = df.withColumn('created_month', SF.month('created_date'))
 df = df.withColumn('created_day', SF.dayofweek('created_date'))
 
 # calculate time of duration
-df = df.withColumn('time_duration',(( df['closed_date']) -( df['created_date']) ))
+timeDiff = (SF.unix_timestamp('Closed Date', "MM/dd/yyyy hh:mm:ss a") -SF. unix_timestamp('Created Date', "MM/dd/yyyy hh:mm:ss a"))
+df = df.withColumn("Duration", timeDiff)
 
 #----- AGENCY
 df = df.withColumn('agency_HPD', SF.when(df.Agency == 'HPD', 1).otherwise(0))
@@ -94,7 +97,6 @@ indexer = StringIndexer(inputCol='descriptor', outputCol='descriptor_index')
 df = indexer.fit(df).transform(df)
 
 #--- LOCATION TYPE 
-groupAndShow(df, 'Location Type').show(100)
 
 # apply
 df = catRepresent(df, 'Location Type', 'location_type', 5)
@@ -104,7 +106,6 @@ indexer = StringIndexer(inputCol='location_type', outputCol='location_type_index
 df = indexer.fit(df).transform(df)
 
 #--- INDICIDENT ZIP
-groupAndShow(df, 'Incident Zip').show(100)
 
 # apply
 df = catRepresent(df, 'Incident Zip', 'incident_zip')
@@ -114,6 +115,27 @@ indexer = StringIndexer(inputCol='incident_zip', outputCol='incident_zip_index')
 df = indexer.fit(df).transform(df)
 
 #--- CROSS STREET
-
 # cross street not null
 df = df.withColumn('cross_street_not_null', SF.when(df['Cross Street 1'].isNotNull(), 1).otherwise(0))
+
+#--- INTERSECTION STREET
+# intersection street not null
+df = df.withColumn('intersection_street_not_null', SF.when(df['Intersection Street 1'].isNotNull(), 1).otherwise(0))
+
+df.show(10)
+
+#--- ADRESS TYPE
+
+# apply
+df = catRepresent(df, 'Address Type', 'adress_type', 5)
+
+# transform in index
+indexer = StringIndexer(inputCol=['adress_type'], outputCol=['adress_type_index'])
+df = indexer.fit(df).transform(df)
+
+#===============================#
+# BUILD AND SAVE PIPELINE
+#==============================#
+
+groupAndSelect(df, 'City').show(100)
+
